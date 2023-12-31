@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
 
 const Notes = () => {
   return (
     <div>
-      <Link to="/">Go Home</Link>
-      <div>Listing Notes</div>
+      <h1>Notes Page</h1>
     </div>
   );
 };

@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto+Serif:ital,opsz,wght@0,8..144,200;0,8..144,300;0,8..144,500;1,8..144,400&family=Roboto:wght@100&display=swap');
+
 * {
    padding: 0;
    margin: 0;
    box-sizing: border-box;
+   font-family: 'Open Sans', sans-serif;
 }
 
 a {
@@ -10,4 +13,41 @@ a {
 
 .nav-link {
    color: white;
+}
+
+.container {
+   height: 100vh;
+   width: 100%;
+   display: grid;
+   background-color: antiquewhite;
+   grid-template-columns: 200px auto;
+   grid-template-rows: 80px;
+   grid-template-areas:
+      "sidebar header"
+      "sidebar content"
+}
+
+#header {
+   grid-area: header;
+   background-color: aqua;
+   padding: 10px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+#header>div {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+}
+
+#side_bar {
+   grid-area: sidebar;
+   background-color: rgb(255, 196, 0);
+}
+
+#content {
+   grid-area: content;
+   margin-left: 10px;
 }

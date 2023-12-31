@@ -1,13 +1,12 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
 interface HeaderProps {
   isLoggedIn: boolean;
+  toggleLogin: () => void;
 }
 
-export default function Header({ isLoggedIn }: HeaderProps) {
+export default function Header({ isLoggedIn, toggleLogin }: HeaderProps) {
   const before_login_liks = [
     {
       address: "/",
@@ -38,26 +37,23 @@ export default function Header({ isLoggedIn }: HeaderProps) {
   ];
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Box sx={{ display: "flex", alignItems: "center", maxWidth: "30%" }}>
-          {isLoggedIn
-            ? before_login_liks.map((ele) => (
-                <Button sx={{ ml: 3, mr: 3, p: 0 }} key={ele.title}>
-                  <Link className="nav-link" to={ele.address}>
-                    {ele.title}
-                  </Link>
-                </Button>
-              ))
-            : after_login_liks.map((ele) => (
-                <Button sx={{ ml: 3, mr: 3, p: 0 }} key={ele.title}>
-                  <Link className="nav-link" to={ele.address}>
-                    {ele.title}
-                  </Link>
-                </Button>
-              ))}
-        </Box>
-      </AppBar>
-    </Box>
+    <>
+      <div>
+        {isLoggedIn
+          ? before_login_liks.map((ele) => (
+              <Link key={ele.title} to={ele.address}>
+                {ele.title}
+              </Link>
+            ))
+          : after_login_liks.map((ele) => (
+              <Link key={ele.title} to={ele.address}>
+                {ele.title}
+              </Link>
+            ))}
+      </div>
+      <Button variant="contained" color="error" onClick={toggleLogin}>
+        {isLoggedIn ? "Login" : "Logout"}
+      </Button>
+    </>
   );
 }

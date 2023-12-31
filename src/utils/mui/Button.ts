@@ -1,9 +1,10 @@
 const CustomButton = {
   MuiButton: {
     styleOverrides: {
-      root: {
+      containedError: {
         color: "yellow",
         backgroundColor: "red",
+        fontWeight: "bold",
         "&:hover": {
           backgroundColor: "orange", // Change the color for hover effect
         },

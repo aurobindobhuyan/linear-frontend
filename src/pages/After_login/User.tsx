@@ -1,10 +1,7 @@
-import { Link } from "react-router-dom";
-
 const User = () => {
   return (
     <div>
-      <Link to="/">Go Home</Link>
-      <div>Users Page</div>
+      <h1>All Users Page</h1>
     </div>
   );
 };
