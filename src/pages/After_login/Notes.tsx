@@ -15,7 +15,11 @@ const Notes = () => {
         <h2>Loading.....</h2>
       ) : (
         allNotes.map((note) => {
-          return <Link to={`/notes/${note._id}`} key={note._id} onClick={() => {}}>{note.title}</Link>;
+          return (
+            <Link to={`/notes/${note._id}`} key={note._id}>
+              {note.title}
+            </Link>
+          );
         })
       )}
     </div>

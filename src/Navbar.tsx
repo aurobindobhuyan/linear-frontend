@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 import User from "./pages/After_login/User";
 import Notes from "./pages/After_login/Notes";
 import NoteId from "./pages/After_login/NoteId";
+import ErrorBoundary from "./ErrorBoundary";
 
 const Header = lazy(() => import("./Header"));
 const Public = lazy(() => import("./pages/Before_login/Public"));
@@ -28,53 +29,55 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
           <Header isLoggedIn={isLoggedIn} toggleLogin={toggleLogin} />
         </div>
         <div id="side_bar"></div>
-        <div id="content">
-          <Suspense fallback={<h1>Loading....</h1>}>
-            <Routes>
-              {isLoggedIn ? (
-                <>
-                  <Route path="/" element={<Public />} />
-                  <Route path="login" element={<Login />} />
-                  <Route path="register" element={<Register />} />
-                </>
-              ) : (
-                <>
-                  <Route path="/" element={<Dashboard />} />
+        <ErrorBoundary>
+          <div id="content">
+            <Suspense fallback={<h1>Loading....</h1>}>
+              <Routes>
+                {isLoggedIn ? (
+                  <>
+                    <Route path="/" element={<Public />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="register" element={<Register />} />
+                  </>
+                ) : (
+                  <>
+                    <Route path="/" element={<Dashboard />} />
 
-                  <Route path="notes">
-                    <Route index element={<Notes />} />
-                    <Route path="/notes/:id" element={<NoteId />} />
-                  </Route>
+                    <Route path="notes">
+                      <Route index element={<Notes />} />
+                      <Route path="/notes/:id" element={<NoteId />} />
+                    </Route>
 
-                  <Route path="users">
-                    <Route index element={<User />} />
-                    <Route path="/users/:id" element={<h1>User's Id</h1>} />
-                  </Route>
+                    <Route path="users">
+                      <Route index element={<User />} />
+                      <Route path="/users/:id" element={<h1>User's Id</h1>} />
+                    </Route>
 
-                  {/* If anyone tries to change the URL manually, so redirect them to home */}
-                  {/* <Route path="login" element={<Navigate to="/" replace />} />
+                    {/* If anyone tries to change the URL manually, so redirect them to home */}
+                    {/* <Route path="login" element={<Navigate to="/" replace />} />
                   <Route
                     path="register"
                     element={<Navigate to="/" replace />}
                   /> */}
-                </>
-              )}
-              <Route
-                path="*"
-                element={
-                  <>
-                    <h1>404 Route not found</h1>
-                    <Button>
-                      <Link className="nav-link" to="/">
-                        Go Home
-                      </Link>
-                    </Button>
                   </>
-                }
-              />
-            </Routes>
-          </Suspense>
-        </div>
+                )}
+                <Route
+                  path="*"
+                  element={
+                    <>
+                      <h1>404 Route not found</h1>
+                      <Button>
+                        <Link className="nav-link" to="/">
+                          Go Home
+                        </Link>
+                      </Button>
+                    </>
+                  }
+                />
+              </Routes>
+            </Suspense>
+          </div>
+        </ErrorBoundary>
       </div>
     </>
   );
