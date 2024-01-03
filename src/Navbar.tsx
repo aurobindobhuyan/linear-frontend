@@ -5,13 +5,15 @@ import { Link, Route, Routes, Navigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 // Components or Pages
+import User from "./pages/After_login/User";
+import Notes from "./pages/After_login/Notes";
+import NoteId from "./pages/After_login/NoteId";
+
 const Header = lazy(() => import("./Header"));
 const Public = lazy(() => import("./pages/Before_login/Public"));
 const Login = lazy(() => import("./pages/Before_login/Login"));
 const Register = lazy(() => import("./pages/Before_login/Register"));
 const Dashboard = lazy(() => import("./pages/After_login/Dashboard"));
-const Notes = lazy(() => import("./pages/After_login/Notes"));
-const User = lazy(() => import("./pages/After_login/User"));
 
 interface NavbarProps {
   isLoggedIn: boolean;
@@ -41,7 +43,7 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
 
                   <Route path="notes">
                     <Route index element={<Notes />} />
-                    <Route path="/notes/:id" element={<h1>Note's Id</h1>} />
+                    <Route path="/notes/:id" element={<NoteId />} />
                   </Route>
 
                   <Route path="users">
