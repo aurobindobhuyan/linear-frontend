@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from "react";
+import { Button } from "@mui/material";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -26,7 +27,18 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render(): ReactNode {
     if (this.state.hasError) {
       // You can render a fallback UI here
-      return <div>Something went wrong. Please try again later.</div>;
+      return (
+        <div>
+          <h1>Something went wrong. Please try again later.</h1>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => window.location.replace("/")}
+          >
+            Reload
+          </Button>
+        </div>
+      );
     }
 
     // Render the child components as usual

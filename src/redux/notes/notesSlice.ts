@@ -39,10 +39,16 @@ export const extendedNotesSlice = apiSlice.injectEndpoints({
         ];
       },
     }),
+    getOnePost: builder.query({
+      query: (id) => `/note/${id}`,
+      transformResponse: (response: any) => {
+        return notesAdapter.upsertOne(initialState, response);
+      },
+    }),
   }),
 });
 
-export const { useGetPostsQuery } = extendedNotesSlice;
+export const { useGetPostsQuery, useGetOnePostQuery } = extendedNotesSlice;
 
 const getResponse = extendedNotesSlice.endpoints.getPosts.select({});
 
@@ -51,6 +57,7 @@ const memorizedNotes = createSelector(
   (response) => response.data
 );
 
-export const { selectAll: selectAllNotes, selectById: selectNoteById } = notesAdapter.getSelectors(
-  (state: RootState) => memorizedNotes(state) ?? initialState
-);
+export const { selectAll: selectAllNotes, selectById: selectNoteById } =
+  notesAdapter.getSelectors(
+    (state: RootState) => memorizedNotes(state) ?? initialState
+  );

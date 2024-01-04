@@ -54,11 +54,11 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
                     </Route>
 
                     {/* If anyone tries to change the URL manually, so redirect them to home */}
-                    {/* <Route path="login" element={<Navigate to="/" replace />} />
-                  <Route
-                    path="register"
-                    element={<Navigate to="/" replace />}
-                  /> */}
+                    <Route path="login" element={<Navigate to="/" replace />} />
+                    <Route
+                      path="register"
+                      element={<Navigate to="/" replace />}
+                    />
                   </>
                 )}
                 <Route
