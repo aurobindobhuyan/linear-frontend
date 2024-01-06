@@ -5,16 +5,17 @@ import { Link, Route, Routes, Navigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 // Components or Pages
-import User from "./pages/After_login/User";
-import Notes from "./pages/After_login/Notes";
-import NoteId from "./pages/After_login/NoteId";
 import ErrorBoundary from "./ErrorBoundary";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
 
-const Header = lazy(() => import("./Header"));
 const Public = lazy(() => import("./pages/Before_login/Public"));
 const Login = lazy(() => import("./pages/Before_login/Login"));
 const Register = lazy(() => import("./pages/Before_login/Register"));
 const Dashboard = lazy(() => import("./pages/After_login/Dashboard"));
+const User = lazy(() => import("./pages/After_login/Users/User"));
+const Notes = lazy(() => import("./pages/After_login/Notes/Notes"));
+const NoteId = lazy(() => import("./pages/After_login/Notes/NoteId"));
 
 interface NavbarProps {
   isLoggedIn: boolean;
@@ -28,7 +29,9 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
         <div id="header">
           <Header isLoggedIn={isLoggedIn} toggleLogin={toggleLogin} />
         </div>
-        <div id="side_bar"></div>
+        <div id="side_bar">
+          <Sidebar isLoggedIn={isLoggedIn} toggleLogin={toggleLogin} />
+        </div>
         <ErrorBoundary>
           <div id="content">
             <Suspense fallback={<h1>Loading....</h1>}>
@@ -66,7 +69,7 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
                   element={
                     <>
                       <h1>404 Route not found</h1>
-                      <Button>
+                      <Button variant="contained" color="primary">
                         <Link className="nav-link" to="/">
                           Go Home
                         </Link>

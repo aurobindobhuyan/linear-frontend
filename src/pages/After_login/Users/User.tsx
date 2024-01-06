@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import {
   useGetUserQuery,
   selectAllUsers,
-} from "../../redux/user/userSlice";
+} from "../../../redux/user/userSlice";
 
 const User = () => {
   useGetUserQuery({});

@@ -6,10 +6,10 @@ import {
 import { apiSlice } from "../api/apiSlice";
 import { RootState } from "../store";
 
-interface INote {
+export interface INote {
   body: string;
   completed: boolean;
-  createdAt: string;
+  createdAt: Date;
   createdUserId: string;
   ticket: number;
   title: string;
@@ -39,16 +39,10 @@ export const extendedNotesSlice = apiSlice.injectEndpoints({
         ];
       },
     }),
-    getOnePost: builder.query({
-      query: (id) => `/note/${id}`,
-      transformResponse: (response: any) => {
-        return notesAdapter.upsertOne(initialState, response);
-      },
-    }),
   }),
 });
 
-export const { useGetPostsQuery, useGetOnePostQuery } = extendedNotesSlice;
+export const { useGetPostsQuery } = extendedNotesSlice;
 
 const getResponse = extendedNotesSlice.endpoints.getPosts.select({});
 

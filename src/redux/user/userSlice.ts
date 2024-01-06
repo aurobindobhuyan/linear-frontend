@@ -6,7 +6,7 @@ import {
 import { apiSlice } from "../api/apiSlice";
 import { RootState } from "../store";
 
-interface IUser {
+export interface IUser {
   createdAt: string;
   email: string;
   isActive: true;
