@@ -17,12 +17,11 @@ const Notes = () => {
 
   return (
     <div>
-      <h1>Notes Page</h1>
-      <br />
       {isLoading && userError ? (
         <h2>Loading.....</h2>
       ) : (
-        <div className="table-container">
+        <div className="user-table-container">
+          <h1>Notes Page</h1>
           <table className="table">
             <thead className="table-head">
               <tr>

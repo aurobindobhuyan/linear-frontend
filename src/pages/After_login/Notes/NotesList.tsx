@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { EntityState } from "@reduxjs/toolkit/react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { IconButton } from "@mui/material";
 
 import { Link } from "react-router-dom";
 import { INote } from "../../../redux/notes/notesSlice";
@@ -32,7 +34,11 @@ const NotesList = ({ users, ...note }: NotesListProps) => {
             {note.title}
           </Link>
         </td>
-        <td onClick={handleToggleOpen}>Open</td>
+        <td>
+          <IconButton className={`icon ${open ? "open" : ""}`} onClick={handleToggleOpen}>
+            <KeyboardArrowDownIcon />
+          </IconButton>
+        </td>
         <td>{note.completed ? "Yes" : "No"}</td>
         <td>{new Date(note.createdAt).toLocaleDateString()}</td>
       </tr>

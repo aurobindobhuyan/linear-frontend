@@ -1,0 +1,73 @@
+.user-table-container {
+   box-shadow: 0 4px 8px 0 #bcbcbc, 0 6px 20px 0 #bcbcbc;
+   border-radius: 10px;
+   height: 500px;
+   overflow-y: auto;
+   overflow-x: hidden;
+   scroll-behavior: smooth;
+   scrollbar-width: thin;
+}
+
+/* .......Header CSS........ */
+.user-header {
+   display: flex;
+   padding: 30px 30px 0px 30px;
+   justify-content: space-between;
+   align-items: center;
+}
+.user-header>div {
+   padding: 0;
+   gap: 40px;
+   justify-content: space-between;
+   align-items: center;
+}
+
+/* .......Table CSS........ */
+.user-table-container::-webkit-scrollbar {
+   width: 7px;
+   background-color: #bcbcbc;
+}
+
+.user-table-container::-webkit-scrollbar-thumb {
+   background-color: #cccccc;
+   border-radius: 5px;
+}
+
+.user-table-container::-webkit-scrollbar-track {
+   background-color: #ffffff;
+}
+
+.user-table {
+   width: 100%;
+   margin: 0;
+   padding: 0px 15px;
+   border-radius: 10px;
+}
+
+.user-table-row>th,
+.user-table-row>td,
+.user_row>td {
+   margin: 0;
+   border-bottom: 1px groove lightsteelblue;
+   padding: 20px;
+   text-align: left;
+}
+
+.icon {
+   transform: rotate(0deg);
+   transition: all 0.25s;
+}
+
+.icon.open {
+   transform: rotate(180deg);
+}
+
+.user_row {
+   height: 0;
+   overflow: hidden;
+   transition: height 0.5s ease;
+}
+
+.user_row.opened {
+   height: 100px;
+}

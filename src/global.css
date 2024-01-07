@@ -4,7 +4,7 @@
    padding: 0;
    margin: 0;
    box-sizing: border-box;
-   font-weight: bold;
+   font-weight: 600;
    font-family: 'Open Sans', sans-serif;
 }
 
@@ -20,6 +20,8 @@ a {
    height: 100vh;
    width: 100%;
    display: grid;
+   overflow: hidden;
+   align-items: start;
    background-color: white;
    grid-template-columns: 250px auto;
    grid-template-rows: 80px;
@@ -29,11 +31,15 @@ a {
 }
 
 #header {
+   position: sticky;
+   top: 0;
+   z-index: 1000;
+   height: 100%;
    grid-area: header;
    background-color: white;
    border-bottom: 1px #eaf1f5;
    border-bottom-style: groove;
-   padding: 10px;
+   padding:  0px 10px;
    display: flex;
    justify-content: space-between;
    align-items: center;
@@ -47,10 +53,16 @@ a {
 
 #content {
    grid-area: content;
-   margin: 10px;
+   padding: 10px;
+   overflow-x: auto;
+   max-height: 100%;
 }
 
 #side_bar {
+   position: sticky;
+   z-index: 1000;
+   top: 0;
+   height: 100dvh;
    grid-area: sidebar;
    padding: 12px;
    background-color: white;
@@ -111,14 +123,14 @@ a {
 }
 
 .table {
-   flex-grow: 1;
+   width: 100%;
    margin: 0;
-   border-spacing: 0;
+   padding: 15px;
+   border-radius: 10px;
 }
 
-th,
-td {
-   flex: 1;
+.table>thead>tr>th,
+.table>tbody>tr>td {
    margin: 0;
    border-bottom: 1px groove #e0e0e0;
    padding: 20px;
@@ -154,11 +166,10 @@ td {
    max-height: 0;
    overflow: hidden;
    opacity: 0;
-   transition: visibility .1s linear, opacity .1s linear;
+   transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 .opened {
    opacity: 1;
-   max-height: 15rem;
-   background-color: #007bff;
+   max-height: 10rem;
 }
