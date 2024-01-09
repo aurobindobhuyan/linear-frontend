@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Link, Route, Routes, Navigate } from "react-router-dom";
 
 // MUI Imports
@@ -23,14 +23,23 @@ interface NavbarProps {
 }
 
 const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
+
+  const handleSidebarEnter = () => setIsSidebarHovered(true);
+  const handleSidebarLeave = () => setIsSidebarHovered(false);
+
   return (
     <>
-      <div className="container">
+      <div className={`container ${isSidebarHovered ? "sidebar-hovered" : ""}`}>
         <div id="header">
           <Header isLoggedIn={isLoggedIn} toggleLogin={toggleLogin} />
         </div>
-        <div id="side_bar">
-          <Sidebar isLoggedIn={isLoggedIn} toggleLogin={toggleLogin} />
+        <div
+          onMouseEnter={handleSidebarEnter}
+          onMouseLeave={handleSidebarLeave}
+          id="side_bar"
+        >
+          <Sidebar isLoggedIn={isLoggedIn} hovered={isSidebarHovered} toggleLogin={toggleLogin} />
         </div>
         <ErrorBoundary>
           <div id="content">

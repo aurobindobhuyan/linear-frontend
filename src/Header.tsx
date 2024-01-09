@@ -1,5 +1,5 @@
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 interface HeaderProps {
   isLoggedIn: boolean;
@@ -39,17 +39,21 @@ export default function Header({ isLoggedIn, toggleLogin }: HeaderProps) {
   return (
     <>
       <div>
-        {isLoggedIn
-          ? before_login_liks.map((ele) => (
-              <Link key={ele.title} to={ele.address}>
-                {ele.title}
-              </Link>
-            ))
-          : after_login_liks.map((ele) => (
-              <Link key={ele.title} to={ele.address}>
-                {ele.title}
-              </Link>
-            ))}
+        <ul style={{ display: "flex" }}>
+          {isLoggedIn
+            ? before_login_liks.map((ele) => (
+                <li className="navLinks" key={ele.title}>
+                  <Link to={ele.address}>{ele.title}</Link>
+                </li>
+              ))
+            : after_login_liks.map((ele) => (
+                <li className="navLinks" key={ele.title}>
+                  <Link className="navLinks" key={ele.title} to={ele.address}>
+                    {ele.title}
+                  </Link>
+                </li>
+              ))}
+        </ul>
       </div>
       <Button variant="contained" color="error" onClick={toggleLogin}>
         {isLoggedIn ? "Login" : "Logout"}

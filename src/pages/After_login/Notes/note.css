@@ -1,0 +1,81 @@
+.note-parent {
+   height: 600px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+.note-table-container {
+   height: 400px;
+   width: 100%;
+   border-radius: 10px;
+   border: 1px groove lightgray;
+   padding: 5px;
+   overflow: auto;
+   margin: 1rem 0px;
+}
+
+/* .........Header CSS........ */
+.note-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.note-header>div {
+   display: flex;
+   padding: 0;
+   gap: 40px;
+   justify-content: space-between;
+   align-items: center;
+}
+
+/* ...........Table CSS....... */
+.note-table {
+   position: relative;
+   width: 100%;
+   margin: 10px 0 20px 0px;
+   max-height: 450px;
+   overflow: auto;
+}
+
+.note-table>thead {
+   position: sticky;
+   top: 0px;
+   background-color: #8978df;
+   color: white;
+}
+
+.note-table-row {
+   display: flex;
+}
+
+.note-table-row:nth-child(even) {
+   background-color: #f3f4f1;
+}
+
+.note-table-row>td,
+.note-table-row>th {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0;
+   border-bottom: 1px groove lightsteelblue;
+   padding: 20px;
+   text-align: left;
+}
+
+.link-style {
+   color: #007bff;
+}
+
+.note-icon {
+   transition: all 0.25s;
+}
+
+.note-icon.open {
+   transform: rotate(180deg);
+}
+
+.note-table-rowInfo.opened {
+   max-height: 10rem;
+}

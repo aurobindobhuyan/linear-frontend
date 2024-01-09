@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto+Serif:ital,opsz,wght@0,8..144,200;0,8..144,300;0,8..144,500;1,8..144,400&family=Roboto:wght@100&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 * {
    padding: 0;
    margin: 0;
    box-sizing: border-box;
-   font-weight: 600;
-   font-family: 'Open Sans', sans-serif;
+   font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -19,15 +18,36 @@ a {
 .container {
    height: 100vh;
    width: 100%;
+   padding: 7px;
+   gap: 7px;
    display: grid;
    overflow: hidden;
    align-items: start;
-   background-color: white;
-   grid-template-columns: 250px auto;
-   grid-template-rows: 80px;
+   background-color: #c3cbdf;
+   grid-template-columns: 120px auto;
+   grid-template-rows: 80px 1fr;
    grid-template-areas:
       "sidebar header"
-      "sidebar content"
+      "sidebar content";
+   transition: grid-template-columns 0.3s ease;
+}
+
+.container.sidebar-hovered {
+   grid-template-columns: 250px auto;
+}
+
+::-webkit-scrollbar {
+   width: 7px;
+   background-color: #bcbcbc;
+}
+
+::-webkit-scrollbar-thumb {
+   background-color: #cccccc;
+   border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+   background-color: #ffffff;
 }
 
 #header {
@@ -36,10 +56,11 @@ a {
    z-index: 1000;
    height: 100%;
    grid-area: header;
-   background-color: white;
+   background-color: #8978df;
+   color: white;
    border-bottom: 1px #eaf1f5;
-   border-bottom-style: groove;
-   padding:  0px 10px;
+   border-radius: 7px;
+   padding: 0px 10px;
    display: flex;
    justify-content: space-between;
    align-items: center;
@@ -54,20 +75,26 @@ a {
 #content {
    grid-area: content;
    padding: 10px;
-   overflow-x: auto;
-   max-height: 100%;
+   overflow: auto;
+   background-color: white;
+   border-radius: 7px;
+   height: 100%;
 }
 
 #side_bar {
    position: sticky;
    z-index: 1000;
    top: 0;
-   height: 100dvh;
+   bottom: 0;
+   left: 0;
+   height: 100vh;
    grid-area: sidebar;
    padding: 12px;
-   background-color: white;
+   background-color: #8978df;
+   color: white;
+   border-radius: 7px;
    border-right: 1px #eaf1f5;
-   border-right-style: groove;
+   overflow: hidden;
 }
 
 .logoDiv {
@@ -80,9 +107,13 @@ a {
 }
 
 .userSection {
-   padding: 10px;
+   padding-bottom: 10px;
    border-bottom: 1px #eaf1f5;
    border-bottom-style: groove;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   margin: 10px 0px;
 }
 
 .link-heading {
@@ -101,75 +132,23 @@ a {
 }
 
 .navLinks>a {
+   color: white;
    width: 100%;
+   display: flex;
    height: 100%;
-   padding: 0.58em 1.428em;
+   padding-left: 20px;
+   border-radius: 10px;
+   gap: 5px;
 }
 
 .navLinks>a>span {
    margin: 0.5rem;
 }
 
+.navLinks>a.active {
+   background-color: #c4cadd;
+}
+
 .userSection>ul>.navLinks:hover {
-   background-color: #f3f3fa;
-}
-
-.table-container {
-   width: 100%;
-   padding: 10px;
-   border-radius: 10px;
-   border: 1px #cadbe6 groove;
-   display: flex;
-}
-
-.table {
-   width: 100%;
-   margin: 0;
-   padding: 15px;
-   border-radius: 10px;
-}
-
-.table>thead>tr>th,
-.table>tbody>tr>td {
-   margin: 0;
-   border-bottom: 1px groove #e0e0e0;
-   padding: 20px;
-   text-align: left;
-}
-
-.link-style {
-   text-decoration: none;
-   color: #007bff;
-}
-
-.table th:nth-child(1),
-.table td:nth-child(1) {
-   width: 1%;
-}
-
-.table th:nth-child(2),
-.table td:nth-child(2) {
-   width: 55%;
-}
-
-.table th:nth-child(3),
-.table td:nth-child(3) {
-   width: 1%;
-}
-
-.table th:nth-child(n+3),
-.table td:nth-child(n+3) {
-   width: 2%;
-}
-
-.table-row {
-   max-height: 0;
-   overflow: hidden;
-   opacity: 0;
-   transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-}
-
-.opened {
-   opacity: 1;
-   max-height: 10rem;
+   background-color: #c4cadd;
 }

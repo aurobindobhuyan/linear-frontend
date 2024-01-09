@@ -1,45 +1,82 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  useGetPostsQuery,
-  selectAllNotes,
-  INote,
-} from "../../../redux/notes/notesSlice";
+import { useGetPostsQuery } from "../../../redux/notes/notesSlice";
+import { selectAllNotes, INote } from "../../../redux/notes/notesSlice";
 import { useGetUserQuery } from "../../../redux/user/userSlice";
 
+import { IconButton, Tooltip } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
 import NotesList from "./NotesList";
+import NoteTableHeader from "./NoteTableHeader";
+import "./note.css";
 
 const Notes = () => {
+  const [showAllNotes, setShowAllNotes] = useState(false);
   const { isLoading, error } = useGetPostsQuery({});
   const { data: allUsers, error: userError } = useGetUserQuery({});
   const allNotes: INote[] = useSelector(selectAllNotes);
 
   if (error) return <h1>Error occured in Notes page.</h1>;
 
+  const handleShowNotes = () => setShowAllNotes(!showAllNotes);
+
   return (
     <div>
       {isLoading && userError ? (
         <h2>Loading.....</h2>
       ) : (
-        <div className="user-table-container">
-          <h1>Notes Page</h1>
-          <table className="table">
-            <thead className="table-head">
-              <tr>
-                <th>Ticket</th>
-                <th>Title</th>
-                <th>Open</th>
-                <th>Completed</th>
-                <th>CreatedAt</th>
-              </tr>
-            </thead>
+        <>
+          <div className="note-parent">
+            <NoteTableHeader />
+            <div className="note-table-container">
+              <table className="note-table">
+                <thead>
+                  <tr className="note-table-row">
+                    <th style={{ flex: 0.5 }}>Ticket</th>
+                    <th style={{ flex: 3, justifyContent: "flex-start" }}>
+                      Title
+                    </th>
+                    <th style={{ flex: 0.5 }}>
+                      <Tooltip
+                        title={showAllNotes ? "Hide" : "Show"}
+                        arrow
+                        describeChild
+                      >
+                        <IconButton color="inherit" onClick={handleShowNotes}>
+                          {showAllNotes ? (
+                            <VisibilityOffIcon />
+                          ) : (
+                            <VisibilityIcon />
+                          )}
+                        </IconButton>
+                      </Tooltip>
+                    </th>
+                    <th style={{ flex: 0.5 }}>Completed</th>
+                    <th style={{ flex: 1 }}>CreatedAt</th>
+                  </tr>
+                </thead>
 
-            <tbody>
-              {allNotes.map((note) => {
-                return <NotesList key={note._id} users={allUsers} {...note} />;
-              })}
-            </tbody>
-          </table>
-        </div>
+                <tbody>
+                  {allNotes.map((note) => {
+                    return (
+                      <NotesList
+                        key={note._id}
+                        showAllNotes={showAllNotes}
+                        users={allUsers}
+                        {...note}
+                      />
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <h4>Pagination Area</h4>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
