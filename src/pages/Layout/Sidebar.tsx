@@ -28,6 +28,7 @@ const Sidebar = ({ hovered }: SidebarProps) => {
       icon: <GroupIcon sx={{ color: "white" }} fontSize="medium" />,
     },
   ];
+
   return (
     <>
       <div className="logoDiv">
@@ -51,8 +52,24 @@ const Sidebar = ({ hovered }: SidebarProps) => {
           ))}
         </ul>
       </section>
-      <section className="adminSection">
+      <section className="userSection">
+        <div className="link-heading">ADMIN</div>
         {/* Need to add the admin only links */}
+        <ul>
+          {after_login_liks.map((ele) => (
+            <li key={ele.title} className="navLinks">
+              <NavLink
+                to={ele.address}
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : ""
+                }
+              >
+                <span>{ele.icon}</span>
+                {hovered && <span>{ele.title}</span>}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </section>
     </>
   );

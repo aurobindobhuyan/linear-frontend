@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import { EntityState } from "@reduxjs/toolkit/react";
-import { RootState } from "../../../redux/store";
-import { IUser, selectUserById } from "../../../redux/user/userSlice";
-import { INote } from "../../../redux/notes/notesSlice";
+import { RootState } from "../../redux/store";
+import { IUser, selectUserById } from "../../redux/user/userSlice";
+import { INote } from "../../redux/notes/notesSlice";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { IconButton } from "@mui/material";

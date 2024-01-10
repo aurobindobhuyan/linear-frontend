@@ -1,0 +1,139 @@
+a {
+   text-decoration: none;
+}
+
+.nav-link {
+   color: white;
+}
+
+.container {
+   height: 100vh;
+   width: 100%;
+   padding: 7px;
+   gap: 7px;
+   display: grid;
+   overflow: hidden;
+   align-items: start;
+   background-color: #c3cbdf;
+   grid-template-columns: 120px auto;
+   grid-template-rows: 80px 1fr;
+   grid-template-areas:
+      "sidebar header"
+      "sidebar content";
+   transition: grid-template-columns 0.3s ease;
+}
+
+.container.sidebar-hovered {
+   grid-template-columns: 250px auto;
+}
+
+.remove-sidebar {
+   grid-template-columns: repeat(1fr);
+   grid-template-rows: 80px 1fr;
+   grid-template-areas:
+      "header header"
+      "content content";
+}
+
+#header {
+   position: sticky;
+   top: 0;
+   z-index: 1000;
+   height: 100%;
+   grid-area: header;
+   background-color: #9988ef;
+   color: white;
+   border-bottom: 1px #eaf1f5;
+   border-radius: 7px;
+   padding: 0px 10px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+#header>div {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+}
+
+#content {
+   grid-area: content;
+   padding: 10px;
+   overflow: auto;
+   background-color: white;
+   border-radius: 7px;
+   height: 100%;
+}
+
+#side_bar {
+   position: relative;
+   z-index: 1000;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   height: 100vh;
+   grid-area: sidebar;
+   padding: 12px;
+   background-color: #9988ef;
+   color: white;
+   border-radius: 7px;
+   border-right: 1px #eaf1f5;
+   overflow: auto;
+}
+
+.logoDiv {
+   height: 80px;
+   background-color: white;
+   padding: 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.userSection {
+   border-bottom: 1px #eaf1f5;
+   border-bottom-style: groove;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.link-heading {
+   display: flex;
+   align-items: center;
+   margin: 15px 0px 0px 0px;
+   padding: 0.58em 1.428em;
+}
+
+.navLinks {
+   display: flex;
+   height: 35px;
+   align-items: center;
+   border-radius: 10px;
+   cursor: pointer;
+   margin: 10px 0px;
+}
+
+.navLinks>a {
+   color: white;
+   width: 100%;
+   display: flex;
+   height: 100%;
+   padding-left: 20px;
+   border-radius: 10px;
+   gap: 5px;
+}
+
+.navLinks>a>span {
+   margin: 0.5rem;
+}
+
+.navLinks>a.active {
+   background-color: #aea3e9;
+}
+
+.navLinks:hover {
+   transition: all 0.5s linear;
+   background-color: #aea3e9;
+}

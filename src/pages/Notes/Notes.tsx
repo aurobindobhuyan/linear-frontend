@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useGetPostsQuery } from "../../../redux/notes/notesSlice";
-import { selectAllNotes, INote } from "../../../redux/notes/notesSlice";
-import { useGetUserQuery } from "../../../redux/user/userSlice";
+import { useGetPostsQuery } from "../../redux/notes/notesSlice";
+import { selectAllNotes, INote } from "../../redux/notes/notesSlice";
+import { useGetUserQuery } from "../../redux/user/userSlice";
 
 import { IconButton, Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";

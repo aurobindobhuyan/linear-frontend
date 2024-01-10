@@ -41,12 +41,12 @@ export default function Header({ isLoggedIn, toggleLogin }: HeaderProps) {
       <div>
         <ul style={{ display: "flex" }}>
           {isLoggedIn
-            ? before_login_liks.map((ele) => (
+            ? after_login_liks.map((ele) => (
                 <li className="navLinks" key={ele.title}>
                   <Link to={ele.address}>{ele.title}</Link>
                 </li>
               ))
-            : after_login_liks.map((ele) => (
+            : before_login_liks.map((ele) => (
                 <li className="navLinks" key={ele.title}>
                   <Link className="navLinks" key={ele.title} to={ele.address}>
                     {ele.title}
@@ -56,7 +56,7 @@ export default function Header({ isLoggedIn, toggleLogin }: HeaderProps) {
         </ul>
       </div>
       <Button variant="contained" color="error" onClick={toggleLogin}>
-        {isLoggedIn ? "Login" : "Logout"}
+        {isLoggedIn ? "Logout" : "Login"}
       </Button>
     </>
   );

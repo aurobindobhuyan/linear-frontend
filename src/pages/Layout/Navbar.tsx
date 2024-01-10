@@ -1,5 +1,6 @@
 import { useState, lazy, Suspense } from "react";
 import { Link, Route, Routes, Navigate } from "react-router-dom";
+import "./navbar.css";
 
 // MUI Imports
 import { Button } from "@mui/material";
@@ -9,13 +10,13 @@ import ErrorBoundary from "./ErrorBoundary";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
-const Public = lazy(() => import("./pages/Before_login/Public"));
-const Login = lazy(() => import("./pages/Before_login/Login"));
-const Register = lazy(() => import("./pages/Before_login/Register"));
-const Dashboard = lazy(() => import("./pages/After_login/Dashboard"));
-const User = lazy(() => import("./pages/After_login/Users/User"));
-const Notes = lazy(() => import("./pages/After_login/Notes/Notes"));
-const NoteId = lazy(() => import("./pages/After_login/Notes/NoteId"));
+const Public = lazy(() => import("../Auth/Public"));
+const Login = lazy(() => import("../Auth/Login"));
+const Register = lazy(() => import("../Auth/Register"));
+const Dashboard = lazy(() => import("./Dashboard"));
+const User = lazy(() => import("../Users/User"));
+const Notes = lazy(() => import("../Notes/Notes"));
+const NoteId = lazy(() => import("../Notes/NoteId"));
 
 interface NavbarProps {
   isLoggedIn: boolean;
@@ -23,29 +24,39 @@ interface NavbarProps {
 }
 
 const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
-  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(true);
 
   const handleSidebarEnter = () => setIsSidebarHovered(true);
   const handleSidebarLeave = () => setIsSidebarHovered(false);
 
   return (
     <>
-      <div className={`container ${isSidebarHovered ? "sidebar-hovered" : ""}`}>
+      <div
+        className={`container ${isSidebarHovered ? "sidebar-hovered" : ""} ${
+          isLoggedIn ? "" : "remove-sidebar"
+        }`}
+      >
         <div id="header">
           <Header isLoggedIn={isLoggedIn} toggleLogin={toggleLogin} />
         </div>
-        <div
-          onMouseEnter={handleSidebarEnter}
-          onMouseLeave={handleSidebarLeave}
-          id="side_bar"
-        >
-          <Sidebar isLoggedIn={isLoggedIn} hovered={isSidebarHovered} toggleLogin={toggleLogin} />
-        </div>
+        {isLoggedIn && (
+          <div
+            onMouseEnter={handleSidebarEnter}
+            onMouseLeave={handleSidebarLeave}
+            id="side_bar"
+          >
+            <Sidebar
+              isLoggedIn={isLoggedIn}
+              hovered={isSidebarHovered}
+              toggleLogin={toggleLogin}
+            />
+          </div>
+        )}
         <ErrorBoundary>
           <div id="content">
             <Suspense fallback={<h1>Loading....</h1>}>
               <Routes>
-                {isLoggedIn ? (
+                {!isLoggedIn ? (
                   <>
                     <Route path="/" element={<Public />} />
                     <Route path="login" element={<Login />} />

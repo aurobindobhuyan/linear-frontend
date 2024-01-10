@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useGetUserQuery, selectAllUsers } from "../../../redux/user/userSlice";
+import { useGetUserQuery, selectAllUsers } from "../../redux/user/userSlice";
 
 import { IconButton, Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";

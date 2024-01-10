@@ -33,7 +33,6 @@
 .note-table {
    position: relative;
    width: 100%;
-   margin: 10px 0 20px 0px;
    max-height: 450px;
    overflow: auto;
 }
@@ -41,8 +40,9 @@
 .note-table>thead {
    position: sticky;
    top: 0px;
-   background-color: #8978df;
+   background-color: #9988ef;
    color: white;
+   z-index: 10;
 }
 
 .note-table-row {

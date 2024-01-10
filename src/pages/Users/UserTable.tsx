@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-import { IUser } from "../../../redux/user/userSlice";
+import { IUser } from "../../redux/user/userSlice";
 import { IconButton } from "@mui/material";
 
 interface UserListProps extends IUser {

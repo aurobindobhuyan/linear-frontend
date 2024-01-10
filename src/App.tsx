@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Navbar from "./Navbar";
-import "./global.css";
+import Navbar from "./pages/Layout/Navbar";
+import "./global.css"
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
   const toggleIsLoggedIn = () => setIsLoggedIn(!isLoggedIn);
 

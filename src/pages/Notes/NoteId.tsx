@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { useGetPostsQuery, selectNoteById } from "../../../redux/notes/notesSlice";
-import { selectUserById, useGetUserQuery } from "../../../redux/user/userSlice";
-import { RootState } from "../../../redux/store";
+import { useGetPostsQuery, selectNoteById } from "../../redux/notes/notesSlice";
+import { selectUserById, useGetUserQuery } from "../../redux/user/userSlice";
+import { RootState } from "../../redux/store";
 import { useParams } from "react-router-dom";
 
 const NoteId = () => {
