@@ -14,8 +14,8 @@ const Public = lazy(() => import("../Auth/Public"));
 const Login = lazy(() => import("../Auth/Login"));
 const Register = lazy(() => import("../Auth/Register"));
 const Dashboard = lazy(() => import("./Dashboard"));
-const User = lazy(() => import("../Users/User"));
-const Notes = lazy(() => import("../Notes/Notes"));
+const UsersTable = lazy(() => import("../Users/UsersTable"));
+const NotesTable = lazy(() => import("../Notes/NotesTable"));
 const NoteId = lazy(() => import("../Notes/NoteId"));
 
 interface NavbarProps {
@@ -24,7 +24,7 @@ interface NavbarProps {
 }
 
 const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
-  const [isSidebarHovered, setIsSidebarHovered] = useState(true);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
   const handleSidebarEnter = () => setIsSidebarHovered(true);
   const handleSidebarLeave = () => setIsSidebarHovered(false);
@@ -67,12 +67,12 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
                     <Route path="/" element={<Dashboard />} />
 
                     <Route path="notes">
-                      <Route index element={<Notes />} />
+                      <Route index element={<NotesTable />} />
                       <Route path="/notes/:id" element={<NoteId />} />
                     </Route>
 
                     <Route path="users">
-                      <Route index element={<User />} />
+                      <Route index element={<UsersTable />} />
                       <Route path="/users/:id" element={<h1>User's Id</h1>} />
                     </Route>
 

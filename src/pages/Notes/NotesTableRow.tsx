@@ -15,7 +15,7 @@ interface NotesListProps extends INote {
   users: EntityState<IUser, string> | undefined;
 }
 
-const NotesList = ({ showAllNotes, users, ...note }: NotesListProps) => {
+const NotesTableRow = ({ showAllNotes, users, ...note }: NotesListProps) => {
   const [open, setOpen] = useState(false);
   const user = useSelector((state: RootState) =>
     selectUserById(state, note.createdUserId)
@@ -30,7 +30,7 @@ const NotesList = ({ showAllNotes, users, ...note }: NotesListProps) => {
 
   return (
     <>
-      <tr className={`note-table-row ${open ? "row-opened" : ""}`}>
+      <tr className={`note-table-row`}>
         <td style={{ flex: 0.5 }}>
           <Link className="link-style" to={`/notes/${note._id}`} key={note._id}>
             {note.ticket}
@@ -55,16 +55,21 @@ const NotesList = ({ showAllNotes, users, ...note }: NotesListProps) => {
         </td>
       </tr>
 
-      {open && (
-        <tr className={`row-table-rowInfo ${open ? "opened" : ""}`}>
-          <td style={{ justifyContent: "flex-start" }} colSpan={5}>
-            <div>Created By: {user.username}</div>
-            <div>{note.body}</div>
-          </td>
-        </tr>
-      )}
+      <tr className={`row-table-rowInfo ${open ? "opened" : "closed"}`}>
+        <td colSpan={6}>
+          <p>
+            <strong>Created By:-</strong>
+            {user.username}
+          </p>
+
+          <p>
+            <strong>Body: -</strong>
+            {note.body}
+          </p>
+        </td>
+      </tr>
     </>
   );
 };
 
-export default NotesList;
+export default NotesTableRow;

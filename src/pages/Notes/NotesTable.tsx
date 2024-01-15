@@ -8,11 +8,11 @@ import { IconButton, Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-import NotesList from "./NotesList";
+import NotesTableRow from "./NotesTableRow";
 import NoteTableHeader from "./NoteTableHeader";
 import "./note.css";
 
-const Notes = () => {
+const NotesTable = () => {
   const [showAllNotes, setShowAllNotes] = useState(false);
   const { isLoading, error } = useGetPostsQuery({});
   const { data: allUsers, error: userError } = useGetUserQuery({});
@@ -61,7 +61,7 @@ const Notes = () => {
                 <tbody>
                   {allNotes.map((note) => {
                     return (
-                      <NotesList
+                      <NotesTableRow
                         key={note._id}
                         showAllNotes={showAllNotes}
                         users={allUsers}
@@ -82,4 +82,4 @@ const Notes = () => {
   );
 };
 
-export default Notes;
+export default NotesTable;

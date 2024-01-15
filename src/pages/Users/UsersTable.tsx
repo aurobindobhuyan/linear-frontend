@@ -6,11 +6,11 @@ import { IconButton, Tooltip } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
-import UserList from "./UserTable";
-import UserTableHeader from "./UserTableHeader";
+import UserList from "./UsersTableRow";
+import UserTableHeader from "./UsersTableHeader";
 import "./user.css";
 
-const User = () => {
+const UserTable = () => {
   const [seeAll, setSeeAll] = useState(false);
   const { isLoading } = useGetUserQuery({});
   const allUsers = useSelector(selectAllUsers);
@@ -63,4 +63,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default UserTable;

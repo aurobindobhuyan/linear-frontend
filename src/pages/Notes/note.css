@@ -59,7 +59,6 @@
    justify-content: center;
    align-items: center;
    margin: 0;
-   border-bottom: 1px groove lightsteelblue;
    padding: 20px;
    text-align: left;
 }
@@ -76,6 +75,19 @@
    transform: rotate(180deg);
 }
 
-.note-table-rowInfo.opened {
+.row-table-rowInfo {
+   background-color: #f9f9f9;
+   border-bottom: 1px groove lightsteelblue;
+   display: flex;
+   overflow: auto;
+}
+
+.row-table-rowInfo.closed {
+   transition: max-height 450ms ease;
+   max-height: 0px;
+}
+
+.row-table-rowInfo.opened {
    max-height: 10rem;
+   transition: max-height 450ms ease;
 }

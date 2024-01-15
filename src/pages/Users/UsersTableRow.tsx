@@ -8,7 +8,7 @@ interface UserListProps extends IUser {
   displayAll: boolean;
 }
 
-const UserList = ({ displayAll, ...user }: UserListProps) => {
+const UsersTableRow = ({ displayAll, ...user }: UserListProps) => {
   const [expand, setExpand] = useState(false);
 
   useEffect(() => {
@@ -45,4 +45,4 @@ const UserList = ({ displayAll, ...user }: UserListProps) => {
   );
 };
 
-export default UserList;
+export default UsersTableRow;
