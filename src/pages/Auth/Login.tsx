@@ -1,11 +1,13 @@
 import { useState } from "react";
 
 import { useLoginMutation } from "../../redux/auth/authApiSlice";
+import "./login.css";
 
 const Login = () => {
+  const [signin, setSignin] = useState(false);
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: "aurobindo@gmail.com",
+    password: "ffffff",
   });
   const [login, { isLoading }] = useLoginMutation();
 
@@ -24,6 +26,11 @@ const Login = () => {
     } catch (error) {
       console.log("error in login", error);
     }
+  };
+
+  const handleToggle = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    setSignin(!signin);
   };
 
   return (
@@ -45,8 +52,57 @@ const Login = () => {
           value={form.password}
           onChange={handleForm}
         />
-        <button type="submit" disabled={isLoading}>Login</button>
+        <button type="submit" disabled={isLoading}>
+          Login
+        </button>
       </form>
+
+      <div className="body_div">
+        <div className={`wrapper ${signin ? "login" : "signin"}`}>
+          <div className="form-container sign-up">
+            <form>
+              <h2>Register</h2>
+              <div className="form-group">
+                <input type="text" id="username" />
+                <label htmlFor="username">Username</label>
+              </div>
+              <div className="form-group">
+                <input type="text" id="email" />
+                <label htmlFor="email">Email</label>
+              </div>
+              <div className="form-group">
+                <input type="text" id="password" />
+                <label htmlFor="password">Password</label>
+              </div>
+
+              <button onClick={handleToggle} className="btn">
+                Register
+              </button>
+
+              <span className="link">Don't have an account?</span>
+            </form>
+          </div>
+          <div className="form-container sign-in">
+            <form>
+              <h2>Login</h2>
+              <div className="form-group">
+                <input type="text" id="email" />
+                <label htmlFor="email">Email</label>
+              </div>
+              <div className="form-group">
+                <input type="text" id="password" />
+                <label htmlFor="password">Password</label>
+              </div>
+
+              <button onClick={handleToggle} className="btn">
+                Login
+              </button>
+
+              <span className="link">Don't have an account?</span>
+            </form>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

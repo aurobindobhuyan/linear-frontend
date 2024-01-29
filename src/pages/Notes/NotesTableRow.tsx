@@ -18,7 +18,7 @@ interface NotesListProps extends INote {
 const NotesTableRow = ({ showAllNotes, users, ...note }: NotesListProps) => {
   const [open, setOpen] = useState(false);
   const user = useSelector((state: RootState) =>
-    selectUserById(state, note.createdUserId)
+  selectUserById(state, note?.createdUserId)
   );
 
   useEffect(() => {
@@ -33,12 +33,12 @@ const NotesTableRow = ({ showAllNotes, users, ...note }: NotesListProps) => {
       <tr className={`note-table-row`}>
         <td style={{ flex: 0.5 }}>
           <Link className="link-style" to={`/notes/${note._id}`} key={note._id}>
-            {note.ticket}
+            {note?.ticket}
           </Link>
         </td>
         <td style={{ flex: 3, justifyContent: "flex-start" }}>
           <Link className="link-style" to={`/notes/${note._id}`} key={note._id}>
-            {note.title}
+            {note?.title}
           </Link>
         </td>
         <td style={{ flex: 0.5 }}>
@@ -51,7 +51,7 @@ const NotesTableRow = ({ showAllNotes, users, ...note }: NotesListProps) => {
         </td>
         <td style={{ flex: 0.5 }}>{note.completed ? "Yes" : "No"}</td>
         <td style={{ flex: 1 }}>
-          {new Date(note.createdAt).toLocaleDateString()}
+          {new Date(note?.createdAt).toLocaleDateString()}
         </td>
       </tr>
 
@@ -59,12 +59,12 @@ const NotesTableRow = ({ showAllNotes, users, ...note }: NotesListProps) => {
         <td colSpan={6}>
           <p>
             <strong>Created By:-</strong>
-            {user.username}
+            {user?.username}
           </p>
 
           <p>
             <strong>Body: -</strong>
-            {note.body}
+            {note?.body}
           </p>
         </td>
       </tr>

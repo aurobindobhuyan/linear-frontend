@@ -12,9 +12,17 @@ const authApiSlice = apiSlice.injectEndpoints({
       async onQueryStarted(_args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
+
+          // Storing the date in localStorage for 1 day;
           const expirationDate = new Date();
-          expirationDate.setTime(expirationDate.getTime() + 60 * 60 * 1000);
-          document.cookie = `accessToken="${data}; expires=${expirationDate.toUTCString()}`;
+          expirationDate.setTime(
+            expirationDate.getTime() + 1000 * 60 * 60 * 24
+          );
+          localStorage.setItem(
+            "accessToken",
+            JSON.stringify(expirationDate.toUTCString())
+          );
+
           dispatch(setToken(data));
         } catch (error) {
           console.log("error", error);
@@ -26,12 +34,14 @@ const authApiSlice = apiSlice.injectEndpoints({
         url: "/auth/logout",
         method: "POST",
       }),
-      async onQueryStarted(_args, { dispatch, getState, queryFulfilled }) {
+      async onQueryStarted(_args, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
-          console.log(getState());
+          localStorage.removeItem("accessToken");
           dispatch(logout());
-          dispatch(apiSlice.util.resetApiState());
+          setTimeout(() => {
+            dispatch(apiSlice.util.resetApiState());
+          }, 1000);
         } catch (error) {
           console.log("error", error);
         }
@@ -42,6 +52,14 @@ const authApiSlice = apiSlice.injectEndpoints({
         url: "/auth/refresh",
         method: "GET",
       }),
+      async onQueryStarted(_args, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setToken(data));
+        } catch (error) {
+          console.log("error in refreshToken", error);
+        }
+      },
     }),
   }),
 });

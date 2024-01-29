@@ -15,7 +15,11 @@ import "./note.css";
 const NotesTable = () => {
   const [showAllNotes, setShowAllNotes] = useState(false);
   const { isLoading, error } = useGetPostsQuery({});
-  const { data: allUsers, error: userError } = useGetUserQuery({});
+  const {
+    data: allUsers,
+    error: userError,
+    isLoading: userLoading,
+  } = useGetUserQuery({});
   const allNotes: INote[] = useSelector(selectAllNotes);
 
   if (error) return <h1>Error occured in Notes page.</h1>;
@@ -24,7 +28,7 @@ const NotesTable = () => {
 
   return (
     <div>
-      {isLoading && userError ? (
+      {isLoading && userLoading && userError ? (
         <h2>Loading.....</h2>
       ) : (
         <>

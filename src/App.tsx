@@ -9,22 +9,14 @@ const App = () => {
   const token = useSelector(getToken).token;
   const dispatch = useDispatch();
 
-  function getCookie(name: string) {
-    const cookies = document.cookie.split("; ");
-    const cookie = cookies.find((cookie) => cookie.startsWith(`${name}=`));
-    return cookie ? cookie.split("=")[1] : null;
-  }
-
   useEffect(() => {
     if (!token) {
-      const accessTokenFromCookie = getCookie("accessToken");
+      const accessTokenFromCookie = localStorage.getItem("accessToken");
       if (accessTokenFromCookie) dispatch(setToken(accessTokenFromCookie));
     }
   }, []);
 
   const toggleIsLoggedIn = () => {
-    document.cookie =
-      "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     dispatch(logout());
   };
 
