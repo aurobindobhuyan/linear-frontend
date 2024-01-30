@@ -27,7 +27,11 @@ const baseQueryWithReauth = async (
       result.meta?.response?.status === 403
     ) {
       // Send the refresh token to get the access token
-      const refreshResult: any = await baseQuery("/auth/refresh", api, extraOptions);
+      const refreshResult: any = await baseQuery(
+        "/auth/refresh",
+        api,
+        extraOptions
+      );
 
       if (refreshResult?.data) {
         // Store the new access token
@@ -35,13 +39,8 @@ const baseQueryWithReauth = async (
 
         // Retry the original request with the new access token
         result = await baseQuery(args, api, extraOptions);
-      } else {
-        if (refreshResult?.error?.status === 404) {
-          refreshResult.error.data = "Your login has expired. ";
-          console.log("Line number 45", refreshResult);
-        }
-        return refreshResult;
       }
+      return refreshResult;
     }
     return result;
   } catch (error) {

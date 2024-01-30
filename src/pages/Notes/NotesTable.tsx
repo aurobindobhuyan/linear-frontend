@@ -22,7 +22,9 @@ const NotesTable = () => {
   } = useGetUserQuery({});
   const allNotes: INote[] = useSelector(selectAllNotes);
 
-  if (error) return <h1>Error occured in Notes page.</h1>;
+  if (error || error?.data?.message || userError?.data?.message) {
+    throw new Error(error.data.message || userError?.data?.message);
+  }
 
   const handleShowNotes = () => setShowAllNotes(!showAllNotes);
 

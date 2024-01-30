@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ReactNode } from "react";
 import { Button } from "@mui/material";
 
 interface ErrorBoundaryProps {
@@ -7,21 +7,21 @@ interface ErrorBoundaryProps {
 
 interface ErrorBoundaryState {
   hasError: boolean;
+  error: null | Error;
 }
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, error: null };
   }
 
   static getDerivedStateFromError() {
-   return { hasError: true };
+    return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.log("Error caught by error boundary:", error, errorInfo);
-    this.setState({ hasError: true });
+  componentDidCatch(error: Error): void {
+    this.setState({ hasError: true, error });
   }
 
   render(): ReactNode {
@@ -29,7 +29,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       // You can render a fallback UI here
       return (
         <div>
-          <h1>Something went wrong. Please try again later.</h1>
+          <h1>
+            {this.state?.error?.message ||
+              "Something went wrong. Please try again later."}
+          </h1>
           <Button
             variant="contained"
             color="error"

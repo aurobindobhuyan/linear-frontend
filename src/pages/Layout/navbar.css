@@ -41,7 +41,7 @@ a {
    z-index: 1000;
    height: 100%;
    grid-area: header;
-   background-color: #9988ef;
+   background: radial-gradient(circle, rgba(173, 110, 241, 1) 0%, rgba(136, 177, 226, 1) 100%);
    color: white;
    border-bottom: 1px #eaf1f5;
    border-radius: 7px;
@@ -75,11 +75,12 @@ a {
    height: 100vh;
    grid-area: sidebar;
    padding: 12px;
-   background-color: #9988ef;
+   background: radial-gradient(circle, rgba(173, 110, 241, 1) 0%, rgba(136, 177, 226, 1) 100%);
    color: white;
    border-radius: 7px;
    border-right: 1px #eaf1f5;
-   overflow: auto;
+   overflow-x: hidden;
+   overflow-y: auto;
 }
 
 .logoDiv {
@@ -136,4 +137,26 @@ a {
 .navLinks:hover {
    transition: all 0.5s linear;
    background-color: #aea3e9;
+}
+
+.logout {
+   position: absolute;
+   bottom: 15px;
+   left: 12px;
+   right: 12px;
+   height: 35px;
+   padding: 10px;
+   display: flex;
+   background: radial-gradient(circle, rgb(137 176 226) 22%, rgb(132 132 238) 100%);
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+}
+
+.logout span {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }

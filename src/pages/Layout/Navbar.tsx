@@ -37,7 +37,7 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
         }`}
       >
         <div id="header">
-          <Header isLoggedIn={isLoggedIn} toggleLogin={toggleLogin} />
+          <Header isLoggedIn={isLoggedIn} />
         </div>
         {isLoggedIn && (
           <div
@@ -52,8 +52,8 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
             />
           </div>
         )}
-        <ErrorBoundary>
-          <div id="content">
+        <div id="content">
+          <ErrorBoundary>
             <Suspense fallback={<h1>Loading....</h1>}>
               <Routes>
                 {!isLoggedIn ? (
@@ -99,8 +99,8 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
                 />
               </Routes>
             </Suspense>
-          </div>
-        </ErrorBoundary>
+          </ErrorBoundary>
+        </div>
       </div>
     </>
   );

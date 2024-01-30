@@ -12,8 +12,12 @@ import "./user.css";
 
 const UserTable = () => {
   const [seeAll, setSeeAll] = useState(false);
-  const { isLoading } = useGetUserQuery({});
+  const { isLoading, error } = useGetUserQuery({});
   const allUsers = useSelector(selectAllUsers);
+
+  if (error || error?.data?.message) {
+    throw new Error(error.data.message);
+  }
 
   const handleSeeAll = () => setSeeAll(!seeAll);
 

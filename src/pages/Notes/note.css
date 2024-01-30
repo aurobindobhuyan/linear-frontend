@@ -40,7 +40,7 @@
 .note-table>thead {
    position: sticky;
    top: 0px;
-   background-color: #9988ef;
+   background: radial-gradient(circle, rgba(173, 110, 241, 1) 0%, rgba(136, 177, 226, 1) 100%);
    color: white;
    z-index: 10;
 }
@@ -64,7 +64,7 @@
 }
 
 .link-style {
-   color: #007bff;
+   color: rgba(173, 110, 241, 1);
 }
 
 .note-icon {
@@ -76,7 +76,7 @@
 }
 
 .row-table-rowInfo {
-   background-color: #f9f9f9;
+   background: radial-gradient(circle, rgb(137 176 226) 22%, rgb(132 132 238) 100%);
    border-bottom: 1px groove lightsteelblue;
    display: flex;
    overflow: auto;

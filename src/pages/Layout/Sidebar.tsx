@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import NotesIcon from "@mui/icons-material/Notes";
 import GroupIcon from "@mui/icons-material/Group";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 
 interface SidebarProps {
   isLoggedIn: boolean;
@@ -10,7 +11,7 @@ interface SidebarProps {
   hovered: boolean;
 }
 
-const Sidebar = ({ hovered }: SidebarProps) => {
+const Sidebar = ({ hovered, toggleLogin }: SidebarProps) => {
   const after_login_liks = [
     {
       address: "/",
@@ -71,6 +72,12 @@ const Sidebar = ({ hovered }: SidebarProps) => {
           ))}
         </ul>
       </section>
+      <div className="logout" onClick={toggleLogin}>
+        <span>
+          <PowerSettingsNewIcon />
+          Logout
+        </span>
+      </div>
     </>
   );
 };

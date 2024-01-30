@@ -1,23 +1,47 @@
 import { useEffect } from "react";
 import Navbar from "./pages/Layout/Navbar";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { getToken, setToken, logout } from "./redux/auth/authSlice";
+import {
+  useLogoutMutation,
+  useRefreshTokenMutation,
+} from "./redux/auth/authApiSlice";
+import { getToken } from "./redux/auth/authSlice";
 import "./global.css";
 
 const App = () => {
   const token = useSelector(getToken).token;
-  const dispatch = useDispatch();
+  const [logOut] = useLogoutMutation();
+  const [refresh] = useRefreshTokenMutation();
+  const navigate = useNavigate();
+
+  const makeRequest = async () => {
+    try {
+      await refresh({});
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
 
   useEffect(() => {
     if (!token) {
-      const accessTokenFromCookie = localStorage.getItem("accessToken");
-      if (accessTokenFromCookie) dispatch(setToken(accessTokenFromCookie));
+      const check_localStorage = localStorage.getItem("refreshToken");
+      if (check_localStorage) {
+        if (new Date() < new Date(check_localStorage)) {
+          makeRequest();
+        }
+      }
     }
   }, []);
 
-  const toggleIsLoggedIn = () => {
-    dispatch(logout());
+  const toggleIsLoggedIn = async () => {
+    try {
+      await logOut({});
+      navigate("/");
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return <Navbar isLoggedIn={Boolean(token)} toggleLogin={toggleIsLoggedIn} />;

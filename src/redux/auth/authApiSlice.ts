@@ -19,7 +19,7 @@ const authApiSlice = apiSlice.injectEndpoints({
             expirationDate.getTime() + 1000 * 60 * 60 * 24
           );
           localStorage.setItem(
-            "accessToken",
+            "refreshToken",
             JSON.stringify(expirationDate.toUTCString())
           );
 
@@ -37,7 +37,7 @@ const authApiSlice = apiSlice.injectEndpoints({
       async onQueryStarted(_args, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
-          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
           dispatch(logout());
           setTimeout(() => {
             dispatch(apiSlice.util.resetApiState());
@@ -57,7 +57,7 @@ const authApiSlice = apiSlice.injectEndpoints({
           const { data } = await queryFulfilled;
           dispatch(setToken(data));
         } catch (error) {
-          console.log("error in refreshToken", error);
+          console.log(error);
         }
       },
     }),

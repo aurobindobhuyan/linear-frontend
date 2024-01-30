@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
 
 interface HeaderProps {
   isLoggedIn: boolean;
-  toggleLogin: () => void;
 }
 
-export default function Header({ isLoggedIn, toggleLogin }: HeaderProps) {
+export default function Header({ isLoggedIn }: HeaderProps) {
   const before_login_liks = [
     {
       address: "/",
@@ -55,9 +53,6 @@ export default function Header({ isLoggedIn, toggleLogin }: HeaderProps) {
               ))}
         </ul>
       </div>
-      <Button variant="contained" color="error" onClick={toggleLogin}>
-        {isLoggedIn ? "Logout" : "Login"}
-      </Button>
     </>
   );
 }
