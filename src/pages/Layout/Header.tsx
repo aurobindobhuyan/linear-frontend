@@ -14,10 +14,6 @@ export default function Header({ isLoggedIn }: HeaderProps) {
       address: "login",
       title: "Login",
     },
-    {
-      address: "register",
-      title: "Register",
-    },
   ];
   const after_login_liks = [
     {

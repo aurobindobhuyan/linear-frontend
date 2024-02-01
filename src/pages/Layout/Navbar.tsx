@@ -11,8 +11,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 
 const Public = lazy(() => import("../Auth/Public"));
-const Login = lazy(() => import("../Auth/Login"));
-const Register = lazy(() => import("../Auth/Register"));
+const LoginWrapper = lazy(() => import("../Auth/LoginWrapper"));
 const Dashboard = lazy(() => import("./Dashboard"));
 const UsersTable = lazy(() => import("../Users/UsersTable"));
 const NotesTable = lazy(() => import("../Notes/NotesTable"));
@@ -59,8 +58,7 @@ const Navbar = ({ isLoggedIn, toggleLogin }: NavbarProps) => {
                 {!isLoggedIn ? (
                   <>
                     <Route path="/" element={<Public />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="register" element={<Register />} />
+                    <Route path="login" element={<LoginWrapper />} />
                   </>
                 ) : (
                   <>
