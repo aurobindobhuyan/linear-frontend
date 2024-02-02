@@ -4,7 +4,7 @@ import { useLoginMutation } from "../../redux/auth/authApiSlice";
 import Register, { registerForm } from "./Register";
 import Login, { loginForm } from "./Login";
 
-import image from "../../../public/computer-security-with-login-password-padlock_107791-16191.avif";
+import image from "/computer-security-with-login-password-padlock_107791-16191.avif";
 
 import "./wrapper.css";
 

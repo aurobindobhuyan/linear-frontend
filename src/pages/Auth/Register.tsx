@@ -14,25 +14,28 @@ interface RegisterProps {
 }
 
 const Register = ({ toggleLogin, handleSubmit }: RegisterProps) => {
-  const [formState, setFormState] = useState<registerForm>({
-    username: "",
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const updateState = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "email") {
-      setFormState({ ...formState, email: e.target.value });
-    } else if (e.target.name === "username") {
-      setFormState({ ...formState, username: e.target.value });
-    } else {
-      setFormState({ ...formState, password: e.target.value });
-    }
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handleUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleSubmit({ action: "register", payload: formState });
+    handleSubmit({
+      action: "register",
+      payload: { email, username, password },
+    });
   };
 
   return (
@@ -40,15 +43,33 @@ const Register = ({ toggleLogin, handleSubmit }: RegisterProps) => {
       <h1>Register</h1>
       <br />
       <div className="form-group">
-        <input type="text" onChange={updateState} name="username" />
+        <input
+          className={`${username ? "hasValue" : ""}`}
+          type="text"
+          value={username}
+          onChange={handleUsername}
+          name="username"
+        />
         <label>username</label>
       </div>
       <div className="form-group">
-        <input type="text" onChange={updateState} name="email" />
+        <input
+          className={`${email ? "hasValue" : ""}`}
+          type="text"
+          value={email}
+          onChange={handleEmail}
+          name="email"
+        />
         <label>Email</label>
       </div>
       <div className="form-group">
-        <input type="password" onChange={updateState} name="password" />
+        <input
+          className={`${password ? "hasValue" : ""}`}
+          type="password"
+          value={password}
+          onChange={handlePassword}
+          name="password"
+        />
         <label>password</label>
       </div>
 

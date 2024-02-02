@@ -77,9 +77,8 @@
    background: transparent;
 }
 
-.form-group input:focus~label,
-.form-group input:valid~label,
-.form-group input:not(:placeholder-shown)~label {
+.form-group input.hasValue~label,
+.form-group input:focus~label {
    top: 0 !important;
    background: linear-gradient(90deg, #9092e5, #9ea1e8, #a9b2e8);
    padding: 0 .2rem;
@@ -150,7 +149,7 @@
 
 /* *........ Transition applied for both side */
 .wrapper_forms.login .signup {
-   transform: rotate(7deg);
+   /* transform: rotate(7deg); */
    animation: front .5s ease-in-out forwards;
 }
 
@@ -161,6 +160,7 @@
 @keyframes front {
    0% {
       transform: rotate(7deg);
+      z-index: 0;
    }
 
    100% {
@@ -172,6 +172,7 @@
 @keyframes back {
    0% {
       transform: rotate(0deg);
+      z-index: 1;
    }
 
    50% {
@@ -180,6 +181,7 @@
 
    100% {
       transform: rotate(7deg);
+      z-index: 0;
    }
 }
 
@@ -194,6 +196,7 @@
 @keyframes front-right {
    0% {
       transform: rotate(7deg);
+      z-index: 0;
    }
 
    100% {
@@ -205,6 +208,7 @@
 @keyframes back-right {
    0% {
       transform: rotate(0deg);
+      z-index: 1;
    }
 
    50% {

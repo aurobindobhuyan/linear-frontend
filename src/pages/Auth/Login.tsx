@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import "./login.css";
-
 export type loginForm = {
   email: string;
   password: string;
@@ -38,11 +36,23 @@ const Login = ({ toggleLogin, handleSubmit }: LoginProps) => {
       <h1>Login</h1>
       <br />
       <div className="form-group">
-        <input type="text" onChange={updateState} name="email" />
+        <input
+          className={`${formState.email ? "hasValue" : ""}`}
+          type="text"
+          onChange={updateState}
+          name="email"
+          value={formState.email}
+        />
         <label>Email</label>
       </div>
       <div className="form-group">
-        <input type="password" onChange={updateState} name="password" />
+        <input
+          className={`${formState.password ? "hasValue" : ""}`}
+          type="password"
+          onChange={updateState}
+          name="password"
+          value={formState.password}
+        />
         <label>Password</label>
       </div>
 
