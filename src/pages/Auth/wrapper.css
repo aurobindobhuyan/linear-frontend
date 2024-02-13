@@ -7,25 +7,6 @@
    overflow: hidden;
 }
 
-.wrapper_image {
-   width: 20rem;
-   display: grid;
-   place-content: center;
-}
-
-.wrapper_image img {
-   object-fit: contain;
-   width: 100%;
-}
-
-.wrapper_container {
-   display: flex;
-   gap: 10px;
-   border-radius: 10px;
-   box-shadow: 0 0 10px 10px lightcyan;
-   border: 1px groove blueviolet;
-}
-
 .wrapper_forms {
    margin: 1rem;
    position: relative;

@@ -29,6 +29,7 @@ const Login = ({ toggleLogin, handleSubmit }: LoginProps) => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmit({ action: "login", payload: formState });
+    setFormState({ email: "", password: "" });
   };
 
   return (

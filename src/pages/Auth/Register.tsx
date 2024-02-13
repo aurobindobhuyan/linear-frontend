@@ -36,6 +36,9 @@ const Register = ({ toggleLogin, handleSubmit }: RegisterProps) => {
       action: "register",
       payload: { email, username, password },
     });
+    setEmail("");
+    setUsername("");
+    setPassword("");
   };
 
   return (
