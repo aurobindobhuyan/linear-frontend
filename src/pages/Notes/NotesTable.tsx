@@ -36,17 +36,32 @@ const NotesTable = () => {
   const notesToShow = allNotes.slice(startIndex, startIndex + limit);
 
   const handlePageChange = (value: string) => {
-    if (value === "&laquo;" || value === "... ") {
+    if (value === "&laquo;") {
       setPage(1);
     } else if (value === "&lsaquo;") {
       setPage(page - 1);
     } else if (value === "&rsaquo;") {
       setPage(page + 1);
-    } else if (value === "&raquo;" || value === " ...") {
+    } else if (value === "&raquo;") {
       setPage(totalPage);
+    } else if (value === " ...") {
+      const nextPage = Math.min(page + 1 * 2 + 1, totalPage);
+      setPage(nextPage);
+    } else if (value === "... ") {
+      const prevPage = Math.max(page - 1 * 2 - 1, 1);
+      setPage(prevPage);
     } else {
       setPage(Number(value));
     }
+  };
+
+  const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newLimit = Number(e.target.value);
+    const newTotalPage = Math.ceil(allNotes.length / newLimit);
+    if (page > newTotalPage) {
+      setPage(newTotalPage);
+    }
+    setLimit(newLimit);
   };
 
   return (
@@ -99,14 +114,30 @@ const NotesTable = () => {
                 </tbody>
               </table>
             </div>
-            <div>
-              <Pagination
-                totalPage={totalPage}
-                page={page}
-                limit={limit}
-                siblings={1}
-                handlePageChange={handlePageChange}
-              />
+            <div className="pagination">
+              <div className="pagination">
+                <Pagination
+                  totalPage={totalPage}
+                  page={page}
+                  limit={limit}
+                  siblings={1}
+                  handlePageChange={handlePageChange}
+                />
+                <div>
+                  <select onChange={handleLimitChange}>
+                    <option value={5}>5</option>
+                    <option value={10}>10</option>
+                    <option value={15}>15</option>
+                  </select>
+                  <span>Items Per page</span>
+                </div>
+              </div>
+              <div className="pagination-summary">
+                <span>{`${startIndex + 1} - ${Math.min(
+                  startIndex + limit,
+                  allNotes.length
+                )} of ${allNotes.length} items`}</span>
+              </div>
             </div>
           </div>
         </>
