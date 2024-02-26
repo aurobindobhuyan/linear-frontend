@@ -14,26 +14,11 @@
    margin: 1rem 0px;
 }
 
-/* .........Header CSS........ */
-.note-header {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-}
-
-.note-header>div {
-   display: flex;
-   padding: 0;
-   gap: 40px;
-   justify-content: space-between;
-   align-items: center;
-}
-
 /* ...........Table CSS....... */
 .note-table {
    position: relative;
    width: 100%;
-   max-height: 450px;
+   height: calc(400px - 20px);
    overflow: auto;
 }
 

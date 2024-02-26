@@ -1,0 +1,26 @@
+.note-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.note-header>div {
+   display: flex;
+   padding: 0;
+   gap: 40px;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.note-header input {
+   width: 300px;
+   padding: 10px;
+   border-radius: 5px;
+   border: 1px groove rgba(173, 110, 241, 1);
+}
+
+.note-header input:focus-visible {
+   border-color: rgba(173, 110, 241, 1);
+   box-shadow: 0 0 5px rgba(173, 110, 241, 1);
+   outline: none;
+}

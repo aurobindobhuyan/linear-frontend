@@ -7,8 +7,8 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import UserList from "./UsersTableRow";
-import UserTableHeader from "./UsersTableHeader";
 import "./user.css";
+import TableHeader from "../../components/TableHeader";
 
 const UserTable = () => {
   const [seeAll, setSeeAll] = useState(false);
@@ -30,7 +30,7 @@ const UserTable = () => {
           <h2>No users found</h2>
         ) : (
           <div className="user-table-container">
-            <UserTableHeader />
+            <TableHeader title="User" handleInput={(e) => {}} />
             <table className="user-table">
               <thead>
                 <tr className="user-table-row">

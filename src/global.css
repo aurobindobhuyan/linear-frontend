@@ -20,3 +20,13 @@
 ::-webkit-scrollbar-track {
    background-color: #ffffff;
 }
+
+select {
+   border: 1px groove rgba(173, 110, 241, 1);
+}
+
+select:focus-visible {
+   border-color: rgba(173, 110, 241, 1);
+   box-shadow: 0 0 5px rgba(173, 110, 241, 1);
+   outline: none;
+}

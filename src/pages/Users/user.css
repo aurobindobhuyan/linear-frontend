@@ -8,20 +8,6 @@
    scrollbar-width: thin;
 }
 
-/* .......Header CSS........ */
-.user-header {
-   display: flex;
-   padding: 30px 30px 0px 30px;
-   justify-content: space-between;
-   align-items: center;
-}
-.user-header>div {
-   padding: 0;
-   gap: 40px;
-   justify-content: space-between;
-   align-items: center;
-}
-
 /* .......Table CSS........ */
 .user-table-container::-webkit-scrollbar {
    width: 7px;

@@ -9,9 +9,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import NotesTableRow from "./NotesTableRow";
-import NoteTableHeader from "./NoteTableHeader";
-import "./note.css";
 import Pagination from "../../components/Pagination";
+import TableHeader from "../../components/TableHeader";
+import "./note.css";
 
 const NotesTable = () => {
   const [showAllNotes, setShowAllNotes] = useState(false);
@@ -24,6 +24,11 @@ const NotesTable = () => {
   const allNotes: INote[] = useSelector(selectAllNotes);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
+  const [input, setInput] = useState("");
+
+  const filteredNotes = allNotes.filter((ele) =>
+    ele.title.toLowerCase().includes(input.toLowerCase())
+  );
 
   if (error || error?.data?.message || userError?.data?.message) {
     throw new Error(error.data.message || userError?.data?.message);
@@ -31,9 +36,13 @@ const NotesTable = () => {
 
   const handleShowNotes = () => setShowAllNotes(!showAllNotes);
 
-  const totalPage = Math.ceil(allNotes.length / limit);
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  };
+
+  const totalPage = Math.ceil(filteredNotes.length / limit);
   const startIndex = (page - 1) * limit;
-  const notesToShow = allNotes.slice(startIndex, startIndex + limit);
+  const notesToShow = filteredNotes.slice(startIndex, startIndex + limit);
 
   const handlePageChange = (value: string) => {
     if (value === "&laquo;") {
@@ -57,7 +66,7 @@ const NotesTable = () => {
 
   const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = Number(e.target.value);
-    const newTotalPage = Math.ceil(allNotes.length / newLimit);
+    const newTotalPage = Math.ceil(filteredNotes.length / newLimit);
     if (page > newTotalPage) {
       setPage(newTotalPage);
     }
@@ -71,7 +80,7 @@ const NotesTable = () => {
       ) : (
         <>
           <div className="note-parent">
-            <NoteTableHeader />
+            <TableHeader title="Note" handleInput={handleInput} />
             <div className="note-table-container">
               <table className="note-table">
                 <thead>
@@ -101,16 +110,24 @@ const NotesTable = () => {
                 </thead>
 
                 <tbody>
-                  {notesToShow.map((note) => {
-                    return (
-                      <NotesTableRow
-                        key={note._id}
-                        showAllNotes={showAllNotes}
-                        users={allUsers}
-                        {...note}
-                      />
-                    );
-                  })}
+                  {notesToShow.length > 0 ? (
+                    <>
+                      {notesToShow.map((note) => {
+                        return (
+                          <NotesTableRow
+                            key={note._id}
+                            showAllNotes={showAllNotes}
+                            users={allUsers}
+                            {...note}
+                          />
+                        );
+                      })}
+                    </>
+                  ) : (
+                    <tr style={{ textAlign: "center" }}>
+                      <td colSpan={10}>No Rows</td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>
@@ -135,8 +152,8 @@ const NotesTable = () => {
               <div className="pagination-summary">
                 <span>{`${startIndex + 1} - ${Math.min(
                   startIndex + limit,
-                  allNotes.length
-                )} of ${allNotes.length} items`}</span>
+                  filteredNotes.length
+                )} of ${filteredNotes.length} items`}</span>
               </div>
             </div>
           </div>
