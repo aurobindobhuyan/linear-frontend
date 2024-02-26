@@ -11,6 +11,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import NotesTableRow from "./NotesTableRow";
 import NoteTableHeader from "./NoteTableHeader";
 import "./note.css";
+import Pagination from "../../components/Pagination";
 
 const NotesTable = () => {
   const [showAllNotes, setShowAllNotes] = useState(false);
@@ -21,12 +22,32 @@ const NotesTable = () => {
     isLoading: userLoading,
   } = useGetUserQuery({});
   const allNotes: INote[] = useSelector(selectAllNotes);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
 
   if (error || error?.data?.message || userError?.data?.message) {
     throw new Error(error.data.message || userError?.data?.message);
   }
 
   const handleShowNotes = () => setShowAllNotes(!showAllNotes);
+
+  const totalPage = Math.ceil(allNotes.length / limit);
+  const startIndex = (page - 1) * limit;
+  const notesToShow = allNotes.slice(startIndex, startIndex + limit);
+
+  const handlePageChange = (value: string) => {
+    if (value === "&laquo;" || value === "... ") {
+      setPage(1);
+    } else if (value === "&lsaquo;") {
+      setPage(page - 1);
+    } else if (value === "&rsaquo;") {
+      setPage(page + 1);
+    } else if (value === "&raquo;" || value === " ...") {
+      setPage(totalPage);
+    } else {
+      setPage(Number(value));
+    }
+  };
 
   return (
     <div>
@@ -65,7 +86,7 @@ const NotesTable = () => {
                 </thead>
 
                 <tbody>
-                  {allNotes.map((note) => {
+                  {notesToShow.map((note) => {
                     return (
                       <NotesTableRow
                         key={note._id}
@@ -79,7 +100,13 @@ const NotesTable = () => {
               </table>
             </div>
             <div>
-              <h4>Pagination Area</h4>
+              <Pagination
+                totalPage={totalPage}
+                page={page}
+                limit={limit}
+                siblings={1}
+                handlePageChange={handlePageChange}
+              />
             </div>
           </div>
         </>

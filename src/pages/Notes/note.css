@@ -76,7 +76,7 @@
 }
 
 .row-table-rowInfo {
-   background: radial-gradient(circle, rgb(137 176 226) 22%, rgb(132 132 238) 100%);
+   background-color: whitesmoke;
    border-bottom: 1px groove lightsteelblue;
    display: flex;
    overflow: auto;
