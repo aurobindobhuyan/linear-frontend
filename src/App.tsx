@@ -8,6 +8,9 @@ import {
   useRefreshTokenMutation,
 } from "./redux/auth/authApiSlice";
 import { getToken } from "./redux/auth/authSlice";
+
+import { SnackBarProvider } from "./utils/snack/SnackBar";
+
 import "./global.css";
 
 const App = () => {
@@ -44,7 +47,13 @@ const App = () => {
     }
   };
 
-  return <Navbar isLoggedIn={Boolean(token)} toggleLogin={toggleIsLoggedIn} />;
+  return (
+    <>
+      <SnackBarProvider>
+        <Navbar isLoggedIn={Boolean(token)} toggleLogin={toggleIsLoggedIn} />
+      </SnackBarProvider>
+    </>
+  );
 };
 
 export default App;

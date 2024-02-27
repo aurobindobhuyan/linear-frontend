@@ -7,7 +7,7 @@ import {
 import Register, { registerForm } from "./Register";
 import Login, { loginForm } from "./Login";
 
-// import { useSnackBar } from "../../utils/snack/SnackBar";
+import { useSnackBar } from "../../utils/snack/SnackBar";
 
 import { IUser } from "../../redux/user/userSlice";
 import "./wrapper.css";
@@ -32,11 +32,11 @@ const LoginWrapper = () => {
   const [login, { isLoading: loginLoading, error: loginError }] =
     useLoginMutation();
 
-  // const { addItem } = useSnackBar();
+  const { addItem } = useSnackBar();
 
   const toggleLogin = () => setSignin(!signin);
 
-  const [register, { isLoading }] = useRegisterMutation();
+  const [register] = useRegisterMutation();
 
   const handleSubmit = async (data: FormPayload) => {
     if (data.action === "login") {
@@ -83,7 +83,7 @@ const LoginWrapper = () => {
           </div>
         </div>
       </div>
-      {/* <button onClick={(e) => addItem("value")}>Click</button> */}
+      <button onClick={() => addItem("message")}>Click</button>
     </div>
   );
 };
